@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-
 gem 'unicorn'
 gem 'rack-timeout'
+gem 'haml'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
