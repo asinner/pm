@@ -1,0 +1,18 @@
+{
+  "name": "pm",
+  "version": "0.0.0",
+  "homepage": "https://github.com/asinner/pm",
+  "authors": [
+    "Andrew Sinner <andrewsinner@gmail.com>"
+  ],
+  "description": "A project management tool",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
