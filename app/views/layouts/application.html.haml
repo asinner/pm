@@ -1,8 +1,14 @@
 !!!
 %html
-%head
-	%title Project Management
-	= stylesheet_link_tag('application', media: 'all')
-	= javascript_include_tag('application')
-	= csrf_meta_tags
-%body
+	%head
+		%title 
+			Project Management
+		%link{href: 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700', rel: 'stylesheet', type: 'text/css'}
+		= stylesheet_link_tag('application', media: 'all')
+		= javascript_include_tag('application')
+		= csrf_meta_tags
+	%body{data: {ng_app: 'projectManagement'}}
+		%div.container-fluid{data: {ui_view: true}}
+		= render 'pages/home'
+		= render 'pages/pricing'
+		= render 'registrations/new'

@@ -1,0 +1,28 @@
+(function() {
+	
+	'use strict';
+	
+	angular.module('projectManagement')
+		.config(function($stateProvider, $urlRouterProvider) {
+			
+			$urlRouterProvider.otherwise("/");
+			
+			$stateProvider
+				.state('home', {
+					url: '/',
+					templateUrl: 'home.html'
+				})
+				
+				.state('pricing', {
+					url: '/pricing',
+					templateUrl: 'pricing.html'
+				})
+				
+				.state('registration', {
+					url: '/sign-up',
+					templateUrl: 'registration.html'
+				})
+			
+		});
+	
+})();

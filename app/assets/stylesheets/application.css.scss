@@ -11,6 +11,13 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap
- *= require_tree .
  *= require_self
  */
+
+@import 'variables';
+@import 'general';
+@import 'typography';
+@import 'buttons';
+@import 'forms';
+@import 'home';
+@import 'pricing';

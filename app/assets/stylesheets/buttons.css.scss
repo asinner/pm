@@ -1,0 +1,47 @@
+.btn {
+	$transition: 200ms;
+	$easing: ease-in-out;
+	-webkit-transition: all $transition $easing;
+	-moz-transition: all $transition $easing;
+	-ms-transition: all $transition $easing;
+	-o-transition: all $transition $easing;
+	transition: all $transition $easing;
+}
+
+.btn-rounded {
+	border-radius: 1000px;
+}
+
+.btn-blue {
+	background: $primary-blue;
+	color: #FFF;
+	&:hover,
+	&:focus,
+	&.focus {
+		color: #FFF;
+		background: darken($primary-blue, 5);
+	}
+}
+
+.btn-green {
+	background: $primary-green;
+	color: #FFF;
+	&:hover,
+	&:focus,
+	&.focus {
+		color: #FFF;
+		background: darken($primary-green, 5);
+	}
+}
+
+.btn-sleek {
+	background: none;
+	border: 2px solid $primary-blue;
+	color: $primary-blue;
+	&:hover,
+	&:focus,
+	&.focus {
+		background: $primary-blue;
+		color: #FFF;
+	}
+}

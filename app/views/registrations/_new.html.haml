@@ -1,0 +1,22 @@
+%script{type: 'text/ng-template', id: 'registration.html'}
+	%h1.text-center.weak
+		Create an account
+	%h2.text-center.h4.text-transparent
+		Start a free 30 day trial. No credit card required.
+	.row
+		%form
+			.col-xs-6.form-group
+				%label First name
+				%input.form-control{type: :text}
+			.col-xs-6.form-group
+				%label Last name
+				%input.form-control{type: :text}
+			.col-xs-12.form-group
+				%label Email
+				%input.form-control{type: :email}
+			.col-xs-12.form-group
+				%label Password
+				%input.form-control{type: :email}
+			.col-xs-12
+				%button.btn.btn-green.btn-lg.btn-block{type: :button}
+					Create your account
