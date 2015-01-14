@@ -1,4 +1,5 @@
 .btn {
+	border-radius: $btn-border-radius;
 	$transition: 200ms;
 	$easing: ease-in-out;
 	-webkit-transition: all $transition $easing;

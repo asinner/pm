@@ -3,20 +3,20 @@
 		Create an account
 	%h2.text-center.h4.text-transparent
 		Start a free 30 day trial. No credit card required.
-	.row
+	.row.form-container
 		%form
 			.col-xs-6.form-group
-				%label First name
-				%input.form-control{type: :text}
+				%label.required First name
+				%input.form-control{type: :text, placeholder: 'John'}
 			.col-xs-6.form-group
-				%label Last name
-				%input.form-control{type: :text}
+				%label.required Last name
+				%input.form-control{type: :text, placeholder: 'Doe'}
 			.col-xs-12.form-group
-				%label Email
-				%input.form-control{type: :email}
+				%label.required Email
+				%input.form-control{type: :email, placeholder: 'john@example.com'}
 			.col-xs-12.form-group
-				%label Password
-				%input.form-control{type: :email}
+				%label.required Password
+				%input.form-control{type: :password, data: {tooltip: 'At least 5 chars', tooltip_trigger: 'focus'}}
 			.col-xs-12
 				%button.btn.btn-green.btn-lg.btn-block{type: :button}
 					Create your account

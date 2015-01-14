@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
   root 'pages#index'
+  
+  namespace :api do
+    # All routes for API Version 1
+    scope module: :v1, constraints: ApiConstraint.new(version: 1) do
+      resources :users
+    end
+    
+    # Catch all API requests
+    # These are the routes are used if no API constraint is sent
+    scope module: :v1 do
+      resources :users
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

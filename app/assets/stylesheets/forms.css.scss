@@ -1,7 +1,27 @@
+.form-container {
+	max-width: 400px;
+	margin: 25px auto 0;
+}
+.form-control {
+	border-radius: $form-control-border-radius;
+	font-size: $form-control-font-size;
+	height: $form-control-height;
+}
+label.required {
+	&::after {
+		color: red;
+		content: ' *';
+	}
+}
+
+
 form {
 	label {
 		font-family: $helvetica;
 		font-size: 13px;
 		color: rgb(40, 40, 40);
+	}
+	input[type='password'] {
+		font-family: $helvetica;
 	}
 }
