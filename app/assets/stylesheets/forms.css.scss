@@ -10,18 +10,60 @@
 label.required {
 	&::after {
 		color: red;
-		content: ' *';
 	}
 }
 
 
 form {
+	font-family: $helvetica;
 	label {
 		font-family: $helvetica;
 		font-size: 13px;
 		color: rgb(40, 40, 40);
+		.glyphicon {
+			color: $primary-green;
+		}
+		.asterisk {
+			color: lighten(red, 20);
+		}
 	}
 	input[type='password'] {
 		font-family: $helvetica;
+	}
+}
+
+.form-errors {
+	color: red;
+	.inner {
+		padding: 15px;
+		background: lighten(red, 47);
+		border-radius: 2px;
+	}
+	margin-bottom: 10px;
+}
+
+.has-error {
+	.form-control {
+		border: 2px solid lighten(red, 20);
+		&:focus {
+			border: 2px solid lighten(red, 20);
+			box-shadow: 0 0 6px lighten(red, 20);
+		}
+	}
+}
+
+.has-success {
+	label {
+		.asterisk {
+			display: none;
+		}
+	}
+	.form-control {
+		border: 2px solid $primary-green;
+		background: lighten($primary-green, 47);
+		&:focus {
+			border: 2px solid $primary-green;
+			box-shadow: 0 0 6px $primary-green;
+		}
 	}
 }

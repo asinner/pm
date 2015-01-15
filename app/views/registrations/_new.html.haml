@@ -4,19 +4,50 @@
 	%h2.text-center.h4.text-transparent
 		Start a free 30 day trial. No credit card required.
 	.row.form-container
-		%form
-			.col-xs-6.form-group
-				%label.required First name
-				%input.form-control{type: :text, placeholder: 'John'}
-			.col-xs-6.form-group
-				%label.required Last name
-				%input.form-control{type: :text, placeholder: 'Doe'}
-			.col-xs-12.form-group
-				%label.required Email
-				%input.form-control{type: :email, placeholder: 'john@example.com'}
-			.col-xs-12.form-group
-				%label.required Password
-				%input.form-control{type: :password, data: {tooltip: 'At least 5 chars', tooltip_trigger: 'focus'}}
+		%form{name: 'registration.form', novalidate: true, data: {ng_controller: 'RegistrationCtrl as registration', ng_submit: 'registration.create(registration.user)'}}
+			.col-xs-12.form-errors{data: {ng_if: 'registration.form.$invalid && registration.form.$submitted'}}
+				.inner
+					%strong
+						Whoops! Looks like there were some errors:
+					%div{data: {ng_messages: 'registration.form.firstName.$error'}}
+						%span{data: {ng_message: 'required'}} Please enter your first name
+					%div{data: {ng_messages: 'registration.form.lastName.$error'}}
+						%span{data: {ng_message: 'required'}} Please enter your last name
+					%div{data: {ng_messages: 'registration.form.email.$error'}}
+						%span{data: {ng_message: 'required'}} Please enter your email
+						%span{data: {ng_message: 'email'}} Please enter a valid email
+					%div{data: {ng_messages: 'registration.form.password.$error'}}
+						%span{data: {ng_message: 'required'}} Please enter your password
+						%span{data: {ng_message: 'minlength'}} Password must be 5 characters or more
+				
+			.col-xs-6.form-group{data: {ng_class: '{"has-error": registration.form.firstName.$invalid && (registration.form.$submitted || registration.form.firstName.$touched), "has-success": registration.form.firstName.$valid && (registration.form.$submitted || registration.form.firstName.$touched)}'}}
+				%label.required 
+					First name
+					%span.asterisk
+						*
+					%span.glyphicon.glyphicon-ok{ng_show: 'registration.form.firstName.$valid && (registration.form.$submitted || registration.form.firstName.$touched)'}
+				%input.form-control{name: 'firstName', required: true, type: :text, placeholder: 'John', data: {ng_model: 'registration.user.first_name', ng_model_options: "{debounce: {'default': 250, blur: 0 }}"}}
+			.col-xs-6.form-group{data: {ng_class: '{"has-error": registration.form.lastName.$invalid && (registration.form.$submitted || registration.form.lastName.$touched), "has-success": registration.form.lastName.$valid && (registration.form.$submitted || registration.form.lastName.$touched)}'}}
+				%label.required 
+					Last name
+					%span.asterisk
+						*
+					%span.glyphicon.glyphicon-ok{ng_show: 'registration.form.lastName.$valid && (registration.form.$submitted || registration.form.lastName.$touched)'}
+				%input.form-control{name: 'lastName', required: true, type: :text, placeholder: 'Doe', data: {ng_model: 'registration.user.last_name', ng_model_options: "{debounce: {'default': 250, blur: 0 }}"}}
+			.col-xs-12.form-group{data: {ng_class: '{"has-error": registration.form.email.$invalid && (registration.form.$submitted || registration.form.email.$touched), "has-success": registration.form.email.$valid && (registration.form.$submitted || registration.form.email.$touched)}'}}
+				%label.required 
+					Email
+					%span.asterisk
+						*
+					%span.glyphicon.glyphicon-ok{ng_show: 'registration.form.email.$valid && (registration.form.$submitted || registration.form.email.$touched)'}
+				%input.form-control{name: 'email', required: true, type: :email, placeholder: 'john@example.com', data: {ng_model: 'registration.user.email', ng_model_options: "{debounce: {'default': 250, blur: 0 }}"}}
+			.col-xs-12.form-group{data: {ng_class: '{"has-error": registration.form.password.$invalid && (registration.form.$submitted || registration.form.password.$touched), "has-success": registration.form.password.$valid && (registration.form.$submitted || registration.form.password.$touched)}'}}
+				%label.required 
+					Password
+					%span.asterisk
+						*
+					%span.glyphicon.glyphicon-ok{ng_show: 'registration.form.password.$valid && (registration.form.$submitted || registration.form.password.$touched)'}
+				%input.form-control{name: 'password', required: true, type: :password, placeholder: 'Password', data: {ng_model: 'registration.user.password', ng_model_options: "{debounce: {'default': 250, blur: 0 }}", ng_minlength: 5, tooltip: 'Password must be at least 5 characters', tooltip_trigger: 'focus'}}
 			.col-xs-12
-				%button.btn.btn-green.btn-lg.btn-block{type: :button}
+				%button.btn.btn-green.btn-lg.btn-block{type: :submit}
 					Create your account

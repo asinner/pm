@@ -5,6 +5,6 @@
 	
 	'use strict';
 	
-	angular.module('projectManagement', ['ui.router', 'ui.bootstrap']);
+	angular.module('projectManagement', ['ui.router', 'ui.bootstrap', 'ngResource', 'ngMessages']);
 	
 })();

@@ -25,5 +25,7 @@ module Pm
       g.javascripts false
       g.helper false
     end
+    
+    config.logger = Logger.new(STDOUT)
   end
 end
