@@ -11,6 +11,14 @@ class Api::V1::UsersController < ApplicationController
     end
   end
   
+  def email
+    if User.find_by(email: params[:email])
+      render status: 204, nothing: true
+    else
+      render status: 404, nothing: true
+    end
+  end
+  
   private
   
   def user_params

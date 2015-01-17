@@ -11,7 +11,7 @@
 			vm.create = create;
 			
 			function create(user) {
-				console.log(user);
+				vm.loading = true;
 				var user = new User(user);
 				user.$save(user).then(success, error);
 					

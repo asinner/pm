@@ -4,13 +4,17 @@ Rails.application.routes.draw do
   namespace :api do
     # All routes for API Version 1
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
-      resources :users
+      resources :users do
+        get 'email', on: :collection
+      end
     end
     
     # Catch all API requests
     # These are the routes are used if no API constraint is sent
     scope module: :v1 do
-      resources :users
+      resources :users do
+        get 'email', on: :collection
+      end
     end
   end
 

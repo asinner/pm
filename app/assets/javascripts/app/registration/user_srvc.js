@@ -3,15 +3,19 @@
 	'use strict';
 	
 	angular.module('projectManagement')
-		.factory('User', User);
+		.service('UserSrvc', UserSrvc);
 		
-		function User($resource, API_BASE) {
-			return $resource(API_BASE + '/users/:id', { id: '@id' }, {
-				'query': { method: 'GET', isArray: false },
-				'update': { method: 'PATCH' }
-			});
+		function UserSrvc($http, API_BASE) {
+			var UserSrvc = {};
+			UserSrvc.checkEmailUniqueness = checkEmailUniqueness;
+			
+			function checkEmailUniqueness(email) {
+				return $http.get(API_BASE + '/users/email?email=' + email);
+			}
+			
+			return UserSrvc;
 		}
 		
-		User.$inject = ['$resource', 'API_BASE']
+		UserSrvc.$inject = ['$http', 'API_BASE'];
 	
 })();
