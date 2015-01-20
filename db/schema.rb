@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114032227) do
+ActiveRecord::Schema.define(version: 20150120044015) do
+
+  create_table "tokens", force: true do |t|
+    t.string   "string"
+    t.integer  "user_id"
+    t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

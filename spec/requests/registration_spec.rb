@@ -12,6 +12,9 @@ RSpec.describe 'User', :type => :request do
           email: 'andrew@example.com',
           password: '123456'
         }
+      }.to_json, {
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json'
       }
       
       expect(response.status).to eq(201)
@@ -31,6 +34,9 @@ RSpec.describe 'User', :type => :request do
           last_name: 'sinner',
           email: 'andrew@example.com'
         }
+      }.to_json, {
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json'
       }
       
       expect(response.status).to eq(422)

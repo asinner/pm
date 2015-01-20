@@ -20,6 +20,7 @@
 					%div{data: {ng_messages: 'registration.form.email.$error'}}
 						%span{data: {ng_message: 'required'}} Please enter your email
 						%span{data: {ng_message: 'email'}} Please enter a valid email
+						%span{data: {ng_message: 'unique'}} Email has already been taken
 					%div{data: {ng_messages: 'registration.form.password.$error'}}
 						%span{data: {ng_message: 'required'}} Please enter your password
 						%span{data: {ng_message: 'minlength'}} Password must be 5 characters or more
@@ -65,7 +66,4 @@
 			-# Submit button field
 			.col-xs-12
 				%button.btn.btn-green.btn-lg.btn-block{type: :submit}
-					%span{ng_hide: 'registration.loading'}
-						Create your account
-					%span{ng_show: 'registration.loading'}
-						.loading-spinner.center
+					Create your account
