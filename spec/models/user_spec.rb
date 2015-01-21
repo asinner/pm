@@ -37,4 +37,8 @@ RSpec.describe User, :type => :model do
     user.password = '1234'
     expect(user).to_not be_valid
   end
+  
+  it 'has a company' do
+    expect(user).to respond_to(:company)
+  end
 end
