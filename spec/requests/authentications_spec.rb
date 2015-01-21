@@ -38,7 +38,7 @@ RSpec.describe "Authentications", :type => :request do
     end
   end
 
-  describe "destroy a token" do
+  describe "destroying a token" do
     context "with valid credentials" do
       let(:string) { SecureRandom::uuid }
       let(:token) { FactoryGirl.create(:token, string: string) }

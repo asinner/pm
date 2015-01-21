@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :users do
         get 'email', on: :collection
       end
+      
+      resources :tokens, only: %w(create destroy)
     end
     
     # Catch all API requests
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
       end
       
       resources :tokens, only: %w(create destroy)
+      resources :companies
     end
   end
 
