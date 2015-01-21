@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Authentications", :type => :request do  
   describe "getting a token" do
-    
     let(:user) {FactoryGirl.create(:user, password: 12345)}
     
     context 'with valid email and password' do
@@ -35,6 +34,19 @@ RSpec.describe "Authentications", :type => :request do
         }
 
         expect(response.status).to eq(401)
+      end
+    end
+  end
+
+  describe "destroy a token" do
+    context "with valid credentials" do
+      let(:string) { SecureRandom::uuid }
+      let(:token) { FactoryGirl.create(:token, string: string) }
+      
+      it 'destroys an authentication token' do
+        delete "/api/tokens/#{string}"
+        expect(response.status).to eq(204)
+        expect(Token.count).to eq(0)
       end
     end
   end

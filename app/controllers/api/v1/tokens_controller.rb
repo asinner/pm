@@ -13,4 +13,10 @@ class Api::V1::TokensController < ApplicationController
       render status: 401, nothing: true
     end
   end
+  
+  def destroy
+    token = Token.find_by(string: params[:id])
+    token.delete if token
+    render status: 204, nothing: true
+  end
 end
