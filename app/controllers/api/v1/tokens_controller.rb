@@ -4,10 +4,13 @@ class Api::V1::TokensController < ApplicationController
     if user && user.authenticate(params[:password])
       token = loop do
         random_token = SecureRandom::uuid
-        break random_token unless Token.exists(string: random_token)
+        break random_token unless Token.exists?(string: random_token)
       end
-    else
       
+      token = Token.create(user: user, string: token, expires_at: 1.year.from_now)
+      render status: 201, json: token
+    else
+      render status: 401, nothing: true
     end
   end
 end
