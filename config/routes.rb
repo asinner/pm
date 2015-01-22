@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       end
       
       resources :tokens, only: %w(create destroy)
+      resources :companies
+      resources :invitations
     end
     
     # Catch all API requests
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
       
       resources :tokens, only: %w(create destroy)
       resources :companies
+      resources :invitations
     end
   end
 

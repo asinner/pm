@@ -10,5 +10,6 @@ FactoryGirl.define do
     last_name "Sinner"
     sequence(:email)
     password '12345678'
+    company
   end
 end

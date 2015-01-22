@@ -1,0 +1,16 @@
+%script{type: 'text/ng-template', id: 'new.company.html'}
+	%h1.weak.text-center
+		Please create a company for your account
+	.row
+		%form{name: 'company.form', novalidate: true, data: {ng_controller: 'NewCompanyCtrl as company', ng_submit: 'company.create(company.model)'}}
+			.col-xs-12.form-group{data: {ng_class: '{"has-error": company.form.name.$invalid && (company.form.$submitted || company.form.name.$touched), "has-success": company.form.name.$valid && (company.form.$submitted || company.form.name.$touched)}'}}
+				%label.required
+					Company name
+					%span.asterisk
+						*
+					%span.glyphicon.glyphicon-ok{ng_show: 'company.form.name.$valid && (company.form.$submitted || company.form.name.$touched)'}	
+				%input.form-control{name: 'name', required: true, type: :text, placeholder: 'Your company name', data: {ng_model: 'company.model.name', ng_model_options: "{debounce: {'default': 250, blur: 0 }}"}}
+			.col-xs-12
+				%button.btn.btn-lg.btn-green.btn-block{type: :submit}
+					Create your company
+		
