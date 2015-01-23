@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'active_model_serializers'
 
+gem 'figaro'
+gem 'aws-sdk'
 gem 'bcrypt', '~> 3.1.7'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml'

@@ -21,4 +21,8 @@ RSpec.describe Invitation, :type => :model do
     invitation.company = nil
     expect(invitation).to be_invalid
   end
+  
+  it 'belongs to a company' do
+    expect(invitation).to respond_to(:company)
+  end
 end
