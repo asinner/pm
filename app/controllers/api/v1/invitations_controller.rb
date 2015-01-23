@@ -4,7 +4,10 @@ class Api::V1::InvitationsController < ApplicationController
     rejects = []
     
     params[:emails].each do |email|
-      inv = current_user.company.invitations.build(recipient: email)
+      inv = current_user.company.invitations.build(
+        recipient: email,
+        key: SecureRandom::uuid
+      )
       inv.save ? invitations << inv : rejects << inv
     end
     

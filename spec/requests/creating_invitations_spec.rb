@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Invitations", :type => :request do
+RSpec.describe "Creating invitations", :type => :request do
   describe 'sending an invite' do
     context 'when a single email is provided' do
       let(:token) {FactoryGirl.create(:token)}
@@ -19,6 +19,8 @@ RSpec.describe "Invitations", :type => :request do
         expect(response.status).to eq(201)
         expect(response.content_type).to eq(Mime::JSON)
         expect(Invitation.count).to eq(1)
+        invitations = json(response.body)[:invitations]
+        expect(invitations[0][:recipient]).to eq('andrew@example.com')
       end
     end
   end
