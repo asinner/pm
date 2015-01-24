@@ -3,6 +3,8 @@ class InvitationMailer < ActionMailer::Base
   
   def invite_to_company(invitation)
     @invitation = invitation
+    @company = @invitation.company
+    
     email = filter_to(@invitation.recipient)
     mail(to: email, subject: "#{@invitation.company.name} has invited you to join their team")
   end

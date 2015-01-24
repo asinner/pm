@@ -8,7 +8,13 @@ class Api::V1::InvitationsController < ApplicationController
         recipient: email,
         key: SecureRandom::uuid
       )
-      inv.save ? invitations << inv : rejects << inv
+      
+      if inv.save
+        invitations << inv
+        InvitationMailer.invite_to_company(inv).deliver        
+      else
+        rejects << inv
+      end
     end
     
     if rejects.empty?
