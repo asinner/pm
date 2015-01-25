@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :tokens, only: %w(create destroy)
       resources :companies
       resources :invitations
+      put '/passwords' => 'user_passwords#update'
     end
     
     # Catch all API requests
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
       resources :tokens, only: %w(create destroy)
       resources :companies
       resources :invitations
+      
+      put '/passwords' => 'user_passwords#update'
+      patch '/passwords' => 'user_passwords#update'
     end
   end
 
