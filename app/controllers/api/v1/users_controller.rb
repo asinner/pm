@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_user, except: [:create]
   wrap_parameters :user, include: User.attribute_names + [:password]
   
   def create
@@ -6,6 +7,16 @@ class Api::V1::UsersController < ApplicationController
     
     if user.save
       render status: 201, json: user
+    else
+      render status: 422, json: user.errors
+    end
+  end
+  
+  def update
+    user = User.find(params[:id])
+    
+    if user.update(user_params)
+      render status: 200, json: user
     else
       render status: 422, json: user.errors
     end

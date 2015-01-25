@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root 'pages#index'
-  
   namespace :api do
     # All routes for API Version 1
     scope module: :v1, constraints: ApiConstraint.new(version: 1) do
