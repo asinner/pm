@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user, except: [:create]
+  before_action :authenticate_user, except: [:create, :email]
   wrap_parameters :user, include: User.attribute_names + [:password]
   
   def create
@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     
-    if user.update(user_params)
+    if user.update(update_user_params)
       render status: 200, json: user
     else
       render status: 422, json: user.errors
@@ -34,5 +34,9 @@ class Api::V1::UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)
+  end
+  
+  def update_user_params
+    params.require(:user).permit(:first_name, :last_name, :email)
   end
 end
