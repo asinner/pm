@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   
   def authenticate_user
-    return render status: 401, nothing: true if current_user.nil?
+    return render status: 401, json: 'You must be authenticated to perform that action' if current_user.nil?
+  end
+  
+  def authenticate_company
+    return render status: 422, json: 'You must create a company to perform that action' if current_user.company.nil?
   end
   
   def current_user

@@ -11,12 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122073423) do
+ActiveRecord::Schema.define(version: 20150127051434) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_customer_id"
+    t.string   "stripe_subscription_id"
+    t.string   "stripe_plan_id"
   end
 
   create_table "invitations", force: true do |t|
