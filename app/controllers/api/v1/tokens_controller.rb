@@ -1,5 +1,5 @@
 class Api::V1::TokensController < ApplicationController
-  def create
+  def create        
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       token = loop do

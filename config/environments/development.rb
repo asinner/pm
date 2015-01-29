@@ -37,5 +37,5 @@ Rails.application.configure do
   # Set Amazon's SES as the delivery method
   config.action_mailer.delivery_method = :amazon_ses
   
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000', protocol: 'http' }
 end

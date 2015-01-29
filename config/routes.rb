@@ -11,7 +11,10 @@ Rails.application.routes.draw do
       resources :invitations
       resources :subscriptions, only: %w(create)
       resources :customers, only: %w(create)
-
+      resources :password_resets, only: %w(create)
+      
+      get '/passwords' => 'user_passwords#new'
+      post '/passwords' => 'user_passwords#create'
       put '/passwords' => 'user_passwords#update'
       patch '/passwords' => 'user_passwords#update'
     end
@@ -28,7 +31,10 @@ Rails.application.routes.draw do
       resources :invitations
       resources :subscriptions, only: %w(create)
       resources :customers, only: %w(create)
+      resources :password_resets, only: %w(create)
       
+      get '/passwords' => 'user_passwords#new'
+      post '/passwords' => 'user_passwords#create'
       put '/passwords' => 'user_passwords#update'
       patch '/passwords' => 'user_passwords#update'
     end
