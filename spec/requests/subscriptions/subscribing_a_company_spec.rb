@@ -26,6 +26,7 @@ RSpec.describe 'Creating a subscription', type: :request do
       company = Company.last
       expect(company.stripe_subscription_id).to be
       expect(company.stripe_plan_id).to eq('p1')
+      expect(company.subscription_status).to eq('active')
     end
   end
   

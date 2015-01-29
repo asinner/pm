@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129033314) do
+ActiveRecord::Schema.define(version: 20150129050954) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150129033314) do
     t.string   "stripe_customer_id"
     t.string   "stripe_subscription_id"
     t.string   "stripe_plan_id"
+    t.string   "subscription_status"
   end
 
   create_table "invitations", force: true do |t|
@@ -43,6 +44,16 @@ ActiveRecord::Schema.define(version: 20150129033314) do
   end
 
   add_index "password_resets", ["user_id"], name: "index_password_resets_on_user_id", using: :btree
+
+  create_table "projects", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
 
   create_table "tokens", force: true do |t|
     t.string   "string"

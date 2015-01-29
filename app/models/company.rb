@@ -3,4 +3,5 @@ class Company < ActiveRecord::Base
   
   has_many :employees, class_name: 'User'
   has_many :invitations
+  has_many :projects
 end

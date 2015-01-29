@@ -19,4 +19,8 @@ RSpec.describe Company, :type => :model do
   it 'has invitations' do
     expect(company).to respond_to(:invitations)
   end
+  
+  it 'has projects' do
+    expect(company).to respond_to(:projects)
+  end
 end

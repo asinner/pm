@@ -18,6 +18,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'stripe'
+gem 'sidekiq'
 
 
 group :development, :test do

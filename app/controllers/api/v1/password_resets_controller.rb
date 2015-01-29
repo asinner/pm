@@ -7,10 +7,10 @@ class Api::V1::PasswordResetsController < ApplicationController
       break random_token unless PasswordReset.exists?(secret: random_token)
     end
     
-    reset = PasswordReset.new(user: user, secret: token)
+    reset = PasswordReset.new(user: user, secret: token, expires_at: 1.hour.from_now)
     
     if reset.save
-      PasswordResetMailer.send_reset(reset).deliver;
+      PasswordResetWorker.perform_async(reset.id)
       render status: 201, json: reset
     else
       render status: 422, json: reset.errors

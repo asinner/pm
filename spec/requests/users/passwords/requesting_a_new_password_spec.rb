@@ -17,15 +17,19 @@ RSpec.describe 'Requesting a new password', type: :request do
       expect(PasswordReset.count).to eq(1)
     end
     
-    it 'emails a password reset to the user' do
-      expect do
-        post '/api/password_resets', {
-          email: user.email
-        }.to_json, {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json'
-        }
-      end.to change(ActionMailer::Base.deliveries, :size).by(1)      
+    it 'queues up an email to send' do
+      PasswordResetWorker.jobs.clear
+
+      post '/api/password_resets', {
+        email: user.email
+      }.to_json, {
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json'
+      }
+    
+      expect(PasswordResetWorker.jobs.size).to eq(1)
+      PasswordResetWorker.drain
+      expect(PasswordResetWorker.jobs.size).to eq(0)
     end
   end
   
