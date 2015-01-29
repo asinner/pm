@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'stripe'
 gem 'sidekiq'
-
+gem 'pundit'
 
 group :development, :test do
   gem 'factory_girl_rails'

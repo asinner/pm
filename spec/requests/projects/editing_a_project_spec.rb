@@ -7,6 +7,23 @@ RSpec.describe 'Editing a project', type: :request do
   let(:new_name) {'An updated project name'}
   let(:new_description) {'An updated description'}
   
+  context 'that does not belong to me' do
+    let(:unauthorized_project) {FactoryGirl.create(:project)}
+    
+    it 'returns a 403' do
+      patch "/api/projects/#{unauthorized_project.id}", {
+        name: 'Hijacked project',
+        description: 'Lolz'
+      }.to_json, {
+        'X-Auth-Token' => token.string,
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json'
+      }
+      
+      expect(response.status).to eq(403)
+    end
+  end
+  
   context 'with valid information' do
     it 'returns a 200' do
       patch "/api/projects/#{project.id}", {

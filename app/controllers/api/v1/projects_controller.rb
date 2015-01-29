@@ -14,6 +14,7 @@ class Api::V1::ProjectsController < ApplicationController
   
   def update
     project = Project.find(params[:id])
+    authorize project
     
     if project.update(project_params)
       render status: 200, json: project

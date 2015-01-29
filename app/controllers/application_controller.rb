@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :null_session
   
   def authenticate_user
@@ -14,5 +14,9 @@ class ApplicationController < ActionController::Base
   def current_user
     token = Token.find_by(string: request.headers['X-Auth-Token'])
     @user ||= token.user if request.headers['X-Auth-Token'] && token
+  end
+  
+  def user_not_authorized
+    render status: 403, json: { msg: 'You are not authorized for that resource' }
   end
 end
