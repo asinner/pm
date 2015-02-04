@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Creating a customer', type: :request do
   let(:stripe_helper) {StripeMock.create_test_helper}
   let(:card) {stripe_helper.generate_card_token}
-  let(:user) {FactoryGirl.create(:user)}
+  let(:user) {FactoryGirl.create(:user_with_company)}
   let(:token) {FactoryGirl.create(:token, user: user)}
+  let(:company) {user.companies.first}
   
   before {StripeMock.start}
   after {StripeMock.stop}
@@ -12,6 +13,7 @@ RSpec.describe 'Creating a customer', type: :request do
   context 'with valid card' do
     it 'returns a 200' do
       post "/api/customers", {
+        company_id: company.id,
         card: card
       }.to_json, {
         'X-Auth-Token' => token.string,

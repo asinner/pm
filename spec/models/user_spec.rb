@@ -38,7 +38,7 @@ RSpec.describe User, :type => :model do
     expect(user).to_not be_valid
   end
   
-  it 'has a company' do
-    expect(user).to respond_to(:company)
+  it 'has companies' do
+    expect(user).to respond_to(:companies)
   end
 end

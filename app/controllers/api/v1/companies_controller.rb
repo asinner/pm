@@ -1,9 +1,9 @@
 class Api::V1::CompaniesController < ApplicationController
-  def create
-    return render status: 422, json: {msg: 'You have already created a company'} if current_user.company
-    
+  before_action :authenticate_user
+  
+  def create    
     company = Company.new(company_params)
-    company.employees << current_user
+    company.users << current_user
     
     if company.save
       render status: 201, json: company
@@ -11,6 +11,19 @@ class Api::V1::CompaniesController < ApplicationController
       render status: 422, json: company.errors
     end
   end
+  
+  def update
+    company = Company.find(params[:id])
+    authorize company
+    
+    if company.update(company_params)
+      render status: 200, json: company
+    else
+      render status: 422, json: company.errors
+    end
+  end
+  
+  private
   
   def company_params
     params.require(:company).permit(:name)

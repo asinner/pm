@@ -3,7 +3,9 @@ class Api::V1::CustomersController < ApplicationController
   before_action :authenticate_company
   
   def create
-    company = current_user.company
+    company = Company.find_by(id: params[:company_id])
+    return render status: 422, json: {msg: 'Invalid company'} unless company
+    authorize company
     
     begin
       customer = Stripe::Customer.create(card: params[:card])

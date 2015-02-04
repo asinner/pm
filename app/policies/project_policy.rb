@@ -6,6 +6,6 @@ class ProjectPolicy < ApplicationPolicy
   end
   
   def update?
-    @record.company == @user.company
+    @user.companies.include?(@record.company)
   end
 end

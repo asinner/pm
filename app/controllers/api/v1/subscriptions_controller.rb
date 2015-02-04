@@ -1,9 +1,9 @@
 class Api::V1::SubscriptionsController < ApplicationController
   before_action :authenticate_user
-  before_action :authenticate_company
   
   def create
-    company = current_user.company
+    company = Company.find(params[:company_id])
+    authorize company
     
     begin
       customer = Stripe::Customer.retrieve(params[:customer][:id])      

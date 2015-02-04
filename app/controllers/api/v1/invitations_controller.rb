@@ -1,17 +1,22 @@
 class Api::V1::InvitationsController < ApplicationController
+  before_action :authenticate_user
+  
   def create
+    company = Company.find(params[:company_id])
+    authorize company
+    
     invitations = []
     rejects = []
     
     params[:emails].each do |email|
-      inv = current_user.company.invitations.build(
+      inv = company.invitations.build(
         recipient: email,
         key: SecureRandom::uuid
       )
       
       if inv.save
         invitations << inv
-        InvitationMailer.invite_to_company(inv).deliver        
+        CompanyInvitationWorker.perform_async(inv.id)
       else
         rejects << inv
       end

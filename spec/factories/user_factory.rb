@@ -10,6 +10,9 @@ FactoryGirl.define do
     last_name "Sinner"
     sequence(:email)
     password '12345678'
-    company
+    
+    factory :user_with_company do
+      after(:create) {|user| user.companies << FactoryGirl.create(:company) }
+    end
   end
 end

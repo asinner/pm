@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_company
-    return render status: 422, json: 'You must create a company to perform that action' if current_user.company.nil?
+    return render status: 422, json: 'You must create a company to perform that action' if current_user.companies.nil?
   end
   
   def current_user

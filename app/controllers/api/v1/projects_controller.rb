@@ -1,9 +1,12 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authenticate_user
-  before_action :authenticate_company
   
   def create
-    project = current_user.company.projects.build(project_params)
+    company = Company.find(params[:company_id])
+    authorize company    
+    return render status: 402, json: {msg: 'Please renew your subscription'} unless company.active?
+    
+    project = company.projects.build(project_params)
     
     if project.save
       render status: 201, json: project
@@ -15,6 +18,7 @@ class Api::V1::ProjectsController < ApplicationController
   def update
     project = Project.find(params[:id])
     authorize project
+    return render status: 402, json: {msg: 'Please renew your subscription'} unless project.company.active?
     
     if project.update(project_params)
       render status: 200, json: project

@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
   
   has_secure_password
   
+  has_many :companies_users
+  has_many :companies, through: :companies_users
+  
   has_many :tokens
-  belongs_to :company
   
   def validate_password?
     password.present? || password_confirmation.present? || new_record?

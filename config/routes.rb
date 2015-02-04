@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :customers, only: %w(create)
       resources :password_resets, only: %w(create)
       resources :projects, only: %w(create update)
+      resources :companies_users, only: %w(create)
       
       get '/passwords' => 'user_passwords#new'
       post '/passwords' => 'user_passwords#create'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
       resources :customers, only: %w(create)
       resources :password_resets, only: %w(create)
       resources :projects, only: %w(create update)
+      resources :companies_users, only: %w(create)
       
       get '/passwords' => 'user_passwords#new'
       post '/passwords' => 'user_passwords#create'

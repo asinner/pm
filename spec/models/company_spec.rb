@@ -12,8 +12,8 @@ RSpec.describe Company, :type => :model do
     expect(company).to be_invalid
   end
   
-  it 'has employees' do
-    expect(company).to respond_to(:employees)
+  it 'has users' do
+    expect(company).to respond_to(:users)
   end
   
   it 'has invitations' do
