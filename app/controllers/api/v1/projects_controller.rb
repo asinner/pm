@@ -1,6 +1,14 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authenticate_user
   
+  def show
+    project = Project.find(params[:id])
+    authorize project
+    return render status: 402, json: {msg: 'Please renew your subscription'} unless project.company.active?
+    
+    render status: 200, json: project
+  end
+  
   def create
     company = Company.find(params[:company_id])
     authorize company    

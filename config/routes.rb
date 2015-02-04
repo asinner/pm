@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :subscriptions, only: %w(create)
       resources :customers, only: %w(create)
       resources :password_resets, only: %w(create)
-      resources :projects, only: %w(create update)
+      resources :projects, only: %w(create update show)
       resources :companies_users, only: %w(create)
       
       get '/passwords' => 'user_passwords#new'
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       resources :subscriptions, only: %w(create)
       resources :customers, only: %w(create)
       resources :password_resets, only: %w(create)
-      resources :projects, only: %w(create update)
+      resources :projects, only: %w(create update show)
       resources :companies_users, only: %w(create)
       
       get '/passwords' => 'user_passwords#new'
