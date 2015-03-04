@@ -10,4 +10,8 @@ class Company < ActiveRecord::Base
   def active?
     self.subscription_status == 'active'
   end
+  
+  def inactive?
+    !self.active?
+  end
 end

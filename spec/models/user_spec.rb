@@ -41,4 +41,9 @@ RSpec.describe User, :type => :model do
   it 'has companies' do
     expect(user).to respond_to(:companies)
   end
+  
+  it 'has projects' do
+    expect(user).to respond_to(:projects)
+  end
+
 end

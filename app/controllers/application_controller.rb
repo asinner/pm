@@ -3,6 +3,24 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :null_session
   
+  def find_taskable(params)
+    klass = [Project, Task].detect { |c| params["#{c.name.underscore}_id"]}
+    begin
+      @taskable = klass.find(params["#{klass.name.underscore}_id"])      
+    rescue NoMethodError
+      raise ActiveRecord::RecordNotFound
+    end
+  end
+  
+  def find_commentable(params)
+    klass = [Discussion, Comment].detect { |c| params["#{c.name.underscore}_id"]}
+    begin
+      @taskable = klass.find(params["#{klass.name.underscore}_id"])      
+    rescue NoMethodError
+      raise ActiveRecord::RecordNotFound
+    end
+  end
+  
   def authenticate_user
     return render status: 401, json: 'You must be authenticated to perform that action' if current_user.nil?
   end

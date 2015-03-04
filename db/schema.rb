@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204050113) do
+ActiveRecord::Schema.define(version: 20150228225756) do
+
+  create_table "assignments", force: true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "assigner_id"
+  end
+
+  add_index "assignments", ["assigner_id"], name: "index_assignments_on_assigner_id", using: :btree
+  add_index "assignments", ["task_id"], name: "index_assignments_on_task_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -33,17 +57,31 @@ ActiveRecord::Schema.define(version: 20150204050113) do
   add_index "companies_users", ["company_id"], name: "index_companies_users_on_company_id", using: :btree
   add_index "companies_users", ["user_id"], name: "index_companies_users_on_user_id", using: :btree
 
+  create_table "discussions", force: true do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "discussions", ["project_id"], name: "index_discussions_on_project_id", using: :btree
+  add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
+
   create_table "invitations", force: true do |t|
     t.string   "recipient"
-    t.integer  "company_id"
     t.string   "key"
     t.datetime "deleted_at"
     t.datetime "used_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "invitable_id"
+    t.string   "invitable_type"
+    t.integer  "user_id"
   end
 
-  add_index "invitations", ["company_id"], name: "index_invitations_on_company_id", using: :btree
+  add_index "invitations", ["invitable_id", "invitable_type"], name: "index_invitations_on_invitable_id_and_invitable_type", using: :btree
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
 
   create_table "password_resets", force: true do |t|
     t.datetime "created_at"
@@ -64,6 +102,28 @@ ActiveRecord::Schema.define(version: 20150204050113) do
   end
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id", using: :btree
+
+  create_table "projects_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id", using: :btree
+  add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.integer  "taskable_id"
+    t.string   "taskable_type"
+    t.string   "description"
+    t.integer  "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
+  add_index "tasks", ["taskable_id", "taskable_type"], name: "index_tasks_on_taskable_id_and_taskable_type", using: :btree
 
   create_table "tokens", force: true do |t|
     t.string   "string"

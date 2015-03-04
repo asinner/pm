@@ -16,4 +16,12 @@ RSpec.describe Project, :type => :model do
     project.company = nil
     expect(project).to be_invalid
   end
+  
+  it 'has a team' do
+    expect(project).to respond_to(:users)
+  end
+  
+  it 'has many discussions' do
+    expect(project).to respond_to(:discussions)
+  end
 end

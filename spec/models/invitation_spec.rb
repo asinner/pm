@@ -17,12 +17,7 @@ RSpec.describe Invitation, :type => :model do
     expect(invitation).to be_invalid
   end
   
-  it 'is invalid without a company' do
-    invitation.company = nil
-    expect(invitation).to be_invalid
-  end
-  
-  it 'belongs to a company' do
-    expect(invitation).to respond_to(:company)
+  it 'has a sender' do
+    expect(invitation).to respond_to(:sender)
   end
 end
