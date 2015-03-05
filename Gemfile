@@ -20,6 +20,7 @@ gem 'unicorn'
 gem 'stripe'
 gem 'sidekiq'
 gem 'pundit'
+gem 'puma'
 
 group :development, :test do
   gem 'factory_girl_rails'
