@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :null_session
+  skip_before_filter :verify_authenticity_token
   
   def find_taskable(params)
     klass = [Project, Task].detect { |c| params["#{c.name.underscore}_id"]}

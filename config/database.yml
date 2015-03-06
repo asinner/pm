@@ -50,9 +50,9 @@ test:
 
 #   DB Instance:      ID pmdb
 #   DB name:          pm_production 
-#   Master Username:  Andrew
-#   Master Password:  PMDB;19x92#
-#   Master Password:  PMDB;19x92#
+#   Master Username:  andrew
+#   Master Password:  DB;19x92#
+#   Master Password:  DB;19x92#
 
 
 production:
