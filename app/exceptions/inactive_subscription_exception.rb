@@ -1,0 +1,2 @@
+class InactiveSubscriptionException < StandardError
+end

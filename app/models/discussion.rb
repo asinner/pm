@@ -9,4 +9,8 @@ class Discussion < ActiveRecord::Base
   has_many :comments, as: :commentable
   
   alias_method :author, :user
+
+  def discussion
+  	self
+  end
 end

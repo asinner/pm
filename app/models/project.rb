@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many :users, through: :projects_users
   has_many :discussions
   has_many :tasks, as: :taskable
+  has_many :uploads, as: :attachable
     
   belongs_to :company
   

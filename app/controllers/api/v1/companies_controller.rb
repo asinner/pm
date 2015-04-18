@@ -4,6 +4,8 @@ class Api::V1::CompaniesController < ApplicationController
   def create    
     company = Company.new(company_params)
     company.users << current_user
+    company.plan = Plan.find_by_name('Trial')
+    company.subscription_status = 'active'
     
     if company.save
       render status: 201, json: company

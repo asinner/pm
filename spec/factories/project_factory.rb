@@ -9,5 +9,13 @@ FactoryGirl.define do
         project.tasks << FactoryGirl.create(:task)
       end
     end
+
+    factory :project_with_discussions do
+      after(:create) do |project| 
+        5.times do
+          FactoryGirl.create(:discussion, project: project)
+        end
+      end
+    end
   end
 end

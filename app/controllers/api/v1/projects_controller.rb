@@ -1,6 +1,19 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :authenticate_user
   
+  def index
+    company = Company.find(params[:company_id]) if params[:company_id]
+    
+    if company
+      projects = company.projects
+      authorize projects
+    else
+      projects = Project.where(company: current_user.companies)
+    end
+
+    render status: 200, json: projects
+  end
+
   def show
     project = Project.find(params[:id])
     authorize project

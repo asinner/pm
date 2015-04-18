@@ -31,7 +31,7 @@ RSpec.describe 'Assigning a user to a task', type: :request do
     end
   end
   
-  context 'with invalid information' do
+  context 'with invalid information (no user id passed)' do
     it 'returns a 404' do
       expect {
         post '/api/assignments', {
@@ -46,7 +46,7 @@ RSpec.describe 'Assigning a user to a task', type: :request do
     end
   end
   
-  context 'with invalid information' do
+  context 'with invalid information (no task id passed)' do
     it 'returns a 404' do
       expect {
         post '/api/assignments', {

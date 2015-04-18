@@ -12,4 +12,11 @@ class Api::V1::CommentsController < ApplicationController
       render status: 422, json: comment.errors
     end
   end
+
+  def index
+    commentable = find_commentable(params)
+    authorize commentable.discussion, :list_comments?
+    authorize_company(commentable.project.company)
+    render status: 200, json: commentable.comments
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228225756) do
+ActiveRecord::Schema.define(version: 20150325042205) do
 
   create_table "assignments", force: true do |t|
     t.integer  "task_id"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 20150228225756) do
 
   add_index "password_resets", ["user_id"], name: "index_password_resets_on_user_id", using: :btree
 
+  create_table "plans", force: true do |t|
+    t.string   "name"
+    t.integer  "upload_limit", limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", force: true do |t|
     t.integer  "company_id"
     t.string   "name"
@@ -113,6 +120,16 @@ ActiveRecord::Schema.define(version: 20150228225756) do
   add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id", using: :btree
   add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id", using: :btree
 
+  create_table "subscriptions", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["company_id"], name: "index_subscriptions_on_company_id", using: :btree
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+
   create_table "tasks", force: true do |t|
     t.integer  "taskable_id"
     t.string   "taskable_type"
@@ -120,10 +137,17 @@ ActiveRecord::Schema.define(version: 20150228225756) do
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "completor_id"
+    t.integer  "uncompletor_id"
+    t.datetime "completed_at"
+    t.datetime "uncompleted_at"
+    t.boolean  "completed"
   end
 
+  add_index "tasks", ["completor_id"], name: "index_tasks_on_completor_id", using: :btree
   add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
   add_index "tasks", ["taskable_id", "taskable_type"], name: "index_tasks_on_taskable_id_and_taskable_type", using: :btree
+  add_index "tasks", ["uncompletor_id"], name: "index_tasks_on_uncompletor_id", using: :btree
 
   create_table "tokens", force: true do |t|
     t.string   "string"
@@ -134,6 +158,24 @@ ActiveRecord::Schema.define(version: 20150228225756) do
   end
 
   add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
+
+  create_table "uploads", force: true do |t|
+    t.integer  "size",            limit: 8
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "title"
+    t.integer  "user_id"
+    t.string   "url"
+    t.string   "mime_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "key"
+    t.integer  "company_id"
+  end
+
+  add_index "uploads", ["attachable_id", "attachable_type"], name: "index_uploads_on_attachable_id_and_attachable_type", using: :btree
+  add_index "uploads", ["company_id"], name: "index_uploads_on_company_id", using: :btree
+  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

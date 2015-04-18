@@ -118,6 +118,7 @@ GEM
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     rack (1.5.2)
+    rack-cors (0.3.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.1.1)
@@ -237,6 +238,7 @@ DEPENDENCIES
   mysql2
   puma
   pundit
+  rack-cors
   rack-timeout
   rails (= 4.1.6)
   rspec-rails

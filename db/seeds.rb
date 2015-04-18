@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Plan.find_or_create_by!(name: 'Trial', upload_limit: 50.gigabytes)
+Plan.find_or_create_by!(name: 'Basic', upload_limit: 50.gigabytes)

@@ -24,4 +24,8 @@ RSpec.describe Project, :type => :model do
   it 'has many discussions' do
     expect(project).to respond_to(:discussions)
   end
+  
+  it 'has many uploads' do
+    expect(project).to respond_to(:uploads)    
+  end
 end

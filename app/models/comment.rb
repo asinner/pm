@@ -13,4 +13,12 @@ class Comment < ActiveRecord::Base
     end
     commentable.project
   end
+
+  def discussion
+    commentable = self.commentable
+    until commentable.class == Discussion
+      commentable = commentable.commentable
+    end
+    commentable
+  end
 end

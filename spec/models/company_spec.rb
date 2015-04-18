@@ -23,4 +23,12 @@ RSpec.describe Company, :type => :model do
   it 'has projects' do
     expect(company).to respond_to(:projects)
   end
+  
+  it 'can determine if it has space for an upload' do
+    expect(company).to respond_to(:can_store?)
+  end
+  
+  it 'has a plan' do
+    expect(company).to respond_to(:plan)
+  end
 end

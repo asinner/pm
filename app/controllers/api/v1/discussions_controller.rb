@@ -12,4 +12,11 @@ class Api::V1::DiscussionsController < ApplicationController
       render status: 422, json: discussion.errors
     end
   end
+
+  def index
+    project = Project.find(params[:project_id])
+    authorize project, :list_discussions?
+    authorize_company(project.company)
+    render status: 200, json: project.discussions
+  end
 end
