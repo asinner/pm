@@ -27,5 +27,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'rspec-rails'
+  gem 'database_cleaner'
   gem 'stripe-ruby-mock', '~> 2.0.1'
 end
